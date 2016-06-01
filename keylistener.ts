@@ -4,7 +4,8 @@ class KeyListener
 {
 	m_leftMouseButton: boolean;
 	m_rightMouseButton: boolean;
-	
+	m_mouseX: number;
+	m_mouseY: number;
 	constructor()
 	{
 		this.m_leftMouseButton = false;
@@ -12,15 +13,43 @@ class KeyListener
 		var canvas = document.getElementById('content');
 
 		canvas.addEventListener("mousedown", this.mouseDown, false);
+		canvas.addEventListener("mouseup", this.mouseUp, false);
 	}
 
-	mouseDown()
+	mouseDown(event)
 	{
-		console.log("button pressed");
+		if(event.which==3)
+		{
+			console.log("right click");
+			this.m_rightMouseButton = true;
+		}
+		else if(event.which==1)
+		{
+			console.log("left click");
+			this.m_leftMouseButton = true;
+		}
 	}
 
-	mouseUp()
+	mouseUp(event)
 	{
 		console.log("button released");
+		if(event.which==3)
+		{
+			this.m_rightMouseButton = false;
+		}
+		else if(event.which ==1)
+		{
+			this.m_leftMouseButton = false;
+		}
+	}
+
+	getLeftMouseButtonDown()
+	{
+		return this.m_leftMouseButton;
+	}
+
+	getRightMouseButtonDown()
+	{
+		return this.m_rightMouseButton;
 	}
 }

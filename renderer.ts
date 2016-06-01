@@ -8,7 +8,12 @@ class Renderer
 	m_scene: THREE.Scene;
 	m_camera: THREE.Camera;
 	m_terrain: Mesh;
-	m_keylistener: KeyListener
+	m_keylistener: KeyListener;
+
+	m_originPoint: THREE.Vector3;
+
+	m_mouseX: number;
+	m_mouseY: number;
 
 	constructor()
 	{
@@ -18,6 +23,8 @@ class Renderer
 		this.m_renderer = new THREE.WebGLRenderer();
 		this.m_renderer.setSize(1000,800);
 		this.m_renderer.setClearColor(0x6655FF,1);
+		this.m_originPoint = new THREE.Vector3(0,0,0);
+		
 		document.getElementById('content').appendChild(this.m_renderer.domElement);
 
 		this.m_renderer.clear();
@@ -38,7 +45,10 @@ class Renderer
 		//this.m_terrain.render(this.m_renderer, this.m_scene, this.m_camera);
 		//if we have right click rotate the camera around the origin
 
-		
+		if(this.m_keylistener.getRightMouseButtonDown())
+		{
+			//rotate camera around origin
+		}
 	}
 
 	

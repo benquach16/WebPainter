@@ -15,14 +15,17 @@ class Renderer
 
 	m_originPoint: THREE.Vector3;
 
-	m_mouseX: number;
-	m_mouseY: number;
+	m_mouseOldX: number;
+	m_mouseOldY: number;
 
 	constructor()
 	{
 
 		//create things
 		this.m_keylistener = new KeyListener();
+		this.m_mouseOldX = 0;
+		this.m_mouseOldY = 0;
+		
 		this.m_renderer = new THREE.WebGLRenderer();
 		this.m_renderer.setSize(1000,800);
 		this.m_renderer.setClearColor(0x6655FF,1);
@@ -44,7 +47,7 @@ class Renderer
 		
 	}
 
-	run()
+	run(): void
 	{
 		requestAnimationFrame(() => this.run());
 		this.m_renderer.render(this.m_scene, this.m_camera);
@@ -55,8 +58,14 @@ class Renderer
 		{
 
 			//rotate camera around origin
-
-			this.m_dummy.rotation.x+=0.1;
+			var mouseX:number = this.m_keylistener.getMouseX();
+			var mouseY:number = this.m_keylistener.getMouseY();
+			if(this.m_mouseOldX != mouseX)
+			{
+				this.m_dummy.rotation.y += this.m_mouseOldX - mouseX;
+				this.m_mouseOldX = mouseX;
+			}
+			
 		}
 	}
 

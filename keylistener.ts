@@ -14,9 +14,10 @@ class KeyListener
 
 		canvas.addEventListener("mousedown", this.mouseDown, false);
 		canvas.addEventListener("mouseup", this.mouseUp, false);
-
+		canvas.addEventListener("mousemove", this.mouseMove, false);
 	}
 
+	//event callback functions
 	mouseDown = (event) =>
 	{
 
@@ -45,6 +46,12 @@ class KeyListener
 		}
 	}
 
+	mouseMove = (event) =>
+	{
+		this.m_mouseX = event.clientX;
+		this.m_mouseY = event.clientY;
+	}
+
 	getLeftMouseButtonDown() : boolean
 	{
 		return this.m_leftMouseButton;
@@ -52,7 +59,16 @@ class KeyListener
 
 	getRightMouseButtonDown() : boolean
 	{
-		console.log(this.m_rightMouseButton);
 		return this.m_rightMouseButton;
+	}
+
+	getMouseX() : number
+	{
+		return this.m_mouseX;
+	}
+
+	getMouseY() : number
+	{
+		return this.m_mouseY;
 	}
 }

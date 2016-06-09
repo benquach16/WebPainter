@@ -6,7 +6,10 @@ class Renderer
 {
 	m_renderer: THREE.WebGLRenderer;
 	m_scene: THREE.Scene;
+
+	m_dummy: THREE.Object3D;
 	m_camera: THREE.Camera;
+	
 	m_terrain: Mesh;
 	m_keylistener: KeyListener;
 
@@ -30,9 +33,12 @@ class Renderer
 		this.m_renderer.clear();
 		this.m_scene = new THREE.Scene();
 		this.m_camera = new THREE.PerspectiveCamera(75, 1,0.1,1000);
+		this.m_dummy = new THREE.Object3D;
+		this.m_scene.add(this.m_dummy);
+		
 		this.m_camera.position = new THREE.Vector3(0,0,100);
 		this.m_camera.lookAt(new THREE.Vector3(0,0,0));
-
+		this.m_dummy.add(this.m_camera);
 		
 		this.m_terrain = new Mesh(this.m_scene);
 		
@@ -47,7 +53,10 @@ class Renderer
 
 		if(this.m_keylistener.getRightMouseButtonDown())
 		{
+
 			//rotate camera around origin
+
+			this.m_dummy.rotation.x+=0.1;
 		}
 	}
 

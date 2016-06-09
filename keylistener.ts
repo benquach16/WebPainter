@@ -2,31 +2,33 @@
 
 class KeyListener
 {
-	m_leftMouseButton: boolean;
-	m_rightMouseButton: boolean;
+	static m_leftMouseButton: boolean;
+	static m_rightMouseButton: boolean;
 	m_mouseX: number;
 	m_mouseY: number;
 	constructor()
 	{
-		this.m_leftMouseButton = false;
-		this.m_rightMouseButton = false;
+		KeyListener.m_leftMouseButton = false;
+		KeyListener.m_rightMouseButton = false;
 		var canvas = document.getElementById('content');
 
 		canvas.addEventListener("mousedown", this.mouseDown, false);
 		canvas.addEventListener("mouseup", this.mouseUp, false);
+
 	}
 
 	mouseDown(event)
 	{
+
 		if(event.which==3)
 		{
 			console.log("right click");
-			this.m_rightMouseButton = true;
+			KeyListener.m_rightMouseButton = true;
 		}
 		else if(event.which==1)
 		{
 			console.log("left click");
-			this.m_leftMouseButton = true;
+			KeyListener.m_leftMouseButton = true;
 		}
 	}
 
@@ -35,21 +37,21 @@ class KeyListener
 		console.log("button released");
 		if(event.which==3)
 		{
-			this.m_rightMouseButton = false;
+			KeyListener.m_rightMouseButton = false;
 		}
 		else if(event.which ==1)
 		{
-			this.m_leftMouseButton = false;
+			KeyListener.m_leftMouseButton = false;
 		}
 	}
 
-	getLeftMouseButtonDown()
+	getLeftMouseButtonDown() : boolean
 	{
-		return this.m_leftMouseButton;
+		return KeyListener.m_leftMouseButton;
 	}
 
-	getRightMouseButtonDown()
+	getRightMouseButtonDown() : boolean
 	{
-		return this.m_rightMouseButton;
+		return KeyListener.m_rightMouseButton;
 	}
 }

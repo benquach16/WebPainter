@@ -62,10 +62,21 @@ class Renderer
 			var mouseY:number = this.m_keylistener.getMouseY();
 			if(this.m_mouseOldX != mouseX)
 			{
-				this.m_dummy.rotation.y += this.m_mouseOldX - mouseX;
+				//this is strange 
+				this.m_dummy.rotation.y += (this.m_mouseOldX - mouseX);
+				this.m_dummy.rotation.x += (this.m_mouseOldY - mouseY);
+				//normalize rotation
+				
+				
 				this.m_mouseOldX = mouseX;
+				this.m_mouseOldY = mouseY;
+				
+				
 			}
 			
+		}
+		if(this.m_keylistener.getMouseWheel())
+		{
 		}
 	}
 

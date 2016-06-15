@@ -9,7 +9,7 @@ class Mesh
 	m_scene: THREE.Scene;
 	constructor(_scene)
 	{
-		this.m_geometry = new THREE.PlaneGeometry(20, 20, 32, 32);
+		this.m_geometry = new THREE.PlaneGeometry(100, 100, 32, 32);
 		//this.m_geometry = new THREE.SphereGeometry(50,16,16);
 
 		this.m_material =

@@ -27,7 +27,7 @@ class Renderer
 		this.m_mouseOldY = 0;
 		
 		this.m_renderer = new THREE.WebGLRenderer();
-		this.m_renderer.setSize(1000,800);
+		this.m_renderer.setSize(1000,1000);
 		this.m_renderer.setClearColor(0x6655FF,1);
 		this.m_originPoint = new THREE.Vector3(0,0,0);
 		
@@ -42,7 +42,9 @@ class Renderer
 		this.m_camera.position = new THREE.Vector3(0,0,100);
 		this.m_camera.lookAt(new THREE.Vector3(0,0,0));
 		this.m_dummy.add(this.m_camera);
-		
+
+		var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+		this.m_scene.add( light );
 		this.m_terrain = new Mesh(this.m_scene);
 		
 	}
@@ -55,7 +57,7 @@ class Renderer
 		//if we have right click rotate the camera around the origin
 
 		if(this.m_keylistener.getRightMouseButtonDown())
-		{
+ 		{
 
 			//rotate camera around origin
 			var mouseX:number = this.m_keylistener.getMouseX();
@@ -63,14 +65,15 @@ class Renderer
 			if(this.m_mouseOldX != mouseX)
 			{
 				//this is strange 
-				this.m_dummy.rotation.y += (this.m_mouseOldX - mouseX);
-				this.m_dummy.rotation.x += (this.m_mouseOldY - mouseY);
+				this.m_dummy.rotation.y += (this.m_mouseOldX - mouseX)/360;
+				this.m_dummy.rotation.x += (this.m_mouseOldY - mouseY)/360;
+				//this.m_dummy.rotation.y+=0.1;
 				//normalize rotation
-				
+
 				
 				this.m_mouseOldX = mouseX;
 				this.m_mouseOldY = mouseY;
-				
+				console.log(this.m_dummy.rotation.y);
 				
 			}
 			

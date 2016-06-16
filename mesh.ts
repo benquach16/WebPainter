@@ -7,6 +7,9 @@ class Mesh
 	//m_geometry: THREE.SphereGeometry;
 	m_material: THREE.MeshLambertMaterial;
 	m_scene: THREE.Scene;
+
+	m_splatShader: THREE.ShaderMaterial;
+
 	constructor(_scene)
 	{
 		this.m_geometry = new THREE.PlaneGeometry(100, 100, 32, 32);
@@ -21,11 +24,8 @@ class Mesh
 		_scene.add(this.m_mesh);
 	}
 
-	//this is not necessary
-	render(_renderer, _scene, _camera)
+	paint(_point: THREE.Vector2) : void
 	{
-
-		_renderer.render(_scene, _camera);
+		//get the mouse coordinates here
 	}
-	
 }

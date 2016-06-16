@@ -81,6 +81,16 @@ class Renderer
 		if(this.m_keylistener.getMouseWheel())
 		{
 		}
+
+		if(this.m_keylistener.getLeftMouseButtonDown())
+		{
+			//get mouse vector
+			//then paint onto mesh
+			var mouseX : number = this.m_keylistener.getMouseX();
+			var mouseY : number = this.m_keylistener.getMouseY();
+			this.m_terrain.paint(new THREE.Vector2(mouseX, mouseY));
+			
+		}
 	}
 
 	

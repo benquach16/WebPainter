@@ -2,6 +2,7 @@
 ///<reference path="./keylistener.ts"/>
 ///<reference path="./three.d.ts"/>
 
+
 class Renderer
 {
 	m_renderer: THREE.WebGLRenderer;
@@ -18,6 +19,9 @@ class Renderer
 	m_mouseOldX: number;
 	m_mouseOldY: number;
 
+	m_screenWidth: number;
+	m_screenHeight: number;
+
 	constructor()
 	{
 
@@ -25,9 +29,12 @@ class Renderer
 		this.m_keylistener = new KeyListener();
 		this.m_mouseOldX = 0;
 		this.m_mouseOldY = 0;
+		this.m_screenWidth = 1000;
+		this.m_screenHeight = 1000;
+		
 		
 		this.m_renderer = new THREE.WebGLRenderer();
-		this.m_renderer.setSize(1000,1000);
+		this.m_renderer.setSize(this.m_screenWidth, this.m_screenHeight);
 		this.m_renderer.setClearColor(0x6655FF,1);
 		this.m_originPoint = new THREE.Vector3(0,0,0);
 		
@@ -88,7 +95,15 @@ class Renderer
 			//then paint onto mesh
 			var mouseX : number = this.m_keylistener.getMouseX();
 			var mouseY : number = this.m_keylistener.getMouseY();
-			this.m_terrain.paint(new THREE.Vector2(mouseX, mouseY));
+			//do some math here
+			var mouseVector : THREE.Vector3 = new THREE.Vector3(mouseX, mouseY, 0.5);
+
+			mouseVector.x = 2 * (mouseX / this.m_screenWidth) - 1;
+			mouseVector.y = 1 - 2 * (mouseY / this.m_screenHeight);
+
+
+			
+			this.m_terrain.paint(mouseVector, this.m_camera);
 			
 		}
 	}

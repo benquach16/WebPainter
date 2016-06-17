@@ -24,8 +24,15 @@ class Mesh
 		_scene.add(this.m_mesh);
 	}
 
-	paint(_point: THREE.Vector2) : void
+	paint(_point: THREE.Vector3, _camera: THREE.Camera) : void
 	{
-		//get the mouse coordinates here
+
+		var raycaster : THREE.Raycaster = new THREE.Raycaster();
+
+		raycaster.setFromCamera(_point, _camera);
+		var array: Array<THREE.Object3D> = new Array<THREE.Object3D>();
+		array.push(this.m_mesh);
+		var intersects = raycaster.intersectObjects(array);
+		console.log(intersects);
 	}
 }

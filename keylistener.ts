@@ -27,19 +27,19 @@ class KeyListener
 
 		if(event.which==3)
 		{
-			console.log("right click");
+			//console.log("right click");
 			this.m_rightMouseButton = true;
 		}
 		else if(event.which==1)
 		{
-			console.log("left click");
+			//console.log("left click");
 			this.m_leftMouseButton = true;
 		}
 	}
 
 	mouseUp = (event) =>
 	{
-		console.log("button released");
+		//console.log("button released");
 		if(event.which==3)
 		{
 			this.m_rightMouseButton = false;

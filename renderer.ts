@@ -80,7 +80,7 @@ class Renderer
 			{
 				//this is strange 
 				this.m_dummy.rotation.y += (this.m_mouseOldX - mouseX)/360;
-				this.m_dummy.rotation.x += (this.m_mouseOldY - mouseY)/360;
+				this.m_dummy.rotation.x -= (this.m_mouseOldY - mouseY)/360;
 				//this.m_dummy.rotation.y+=0.1;
 				//normalize rotation
 
@@ -105,8 +105,8 @@ class Renderer
 			//do some math here
 			var mouseVector : THREE.Vector3 = new THREE.Vector3(mouseX, mouseY, 0.5);
 
-			mouseVector.x = 2 * (mouseX / this.m_screenWidth) - 1;
-			mouseVector.y = 1 - 2 * (mouseY / this.m_screenHeight);
+			mouseVector.x = 2 * (mouseX / window.innerWidth) - 1;
+			mouseVector.y = -2 * (mouseY / window.innerHeight) + 1;
 
 
 			

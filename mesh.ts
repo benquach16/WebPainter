@@ -29,10 +29,9 @@ class Mesh
 
 		var raycaster : THREE.Raycaster = new THREE.Raycaster();
 
-		//var direction = new THREE.Vector3( 0, 0, -1 ).transformDirection( _camera.matrixWorld );
-		//raycaster.set(_point, direction);
 		raycaster.setFromCamera(_point, _camera);
 		var intersects = raycaster.intersectObject(this.m_mesh);
-		console.log(intersects);
+		if(intersects.length > 0)
+			console.log("hit");
 	}
 }

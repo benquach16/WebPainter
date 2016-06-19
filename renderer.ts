@@ -51,7 +51,7 @@ class Renderer
 		this.m_dummy = new THREE.Object3D;
 		this.m_scene.add(this.m_dummy);
 		
-		this.m_camera.position.z=200;
+		this.m_camera.position.z=150;
 		
 		this.m_camera.lookAt(new THREE.Vector3(0,0,0));
 
@@ -70,7 +70,6 @@ class Renderer
 		this.m_renderer.render(this.m_scene, this.m_camera);
 		//this.m_terrain.render(this.m_renderer, this.m_scene, this.m_camera);
 		//if we have right click rotate the camera around the origin
-
 		if(this.m_keylistener.getRightMouseButtonDown())
  		{
 
@@ -80,8 +79,8 @@ class Renderer
 			if(this.m_mouseOldX != mouseX)
 			{
 				//this is strange 
-				this.m_dummy.rotation.y += (this.m_mouseOldX - mouseX);
-				this.m_dummy.rotation.x += (this.m_mouseOldY - mouseY);
+				this.m_dummy.rotation.y += (this.m_mouseOldX - mouseX)/360;
+				this.m_dummy.rotation.x += (this.m_mouseOldY - mouseY)/360;
 				//this.m_dummy.rotation.y+=0.1;
 				//normalize rotation
 

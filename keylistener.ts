@@ -12,13 +12,13 @@ class KeyListener
 		this.m_leftMouseButton = false;
 		this.m_rightMouseButton = false;
 		this.m_mouseWheel = 0;
-		var canvas = document.getElementById('content');
-/*
+		var canvas = document.getElementById('canvas');
+
 		canvas.addEventListener("mousedown", this.mouseDown, false);
 		canvas.addEventListener("mouseup", this.mouseUp, false);
 		canvas.addEventListener("mousemove", this.mouseMove, false);
 		canvas.addEventListener("mousewheel", this.mouseWheel, false);
-*/
+
 	}
 
 	//event callback functions

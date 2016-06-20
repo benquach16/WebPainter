@@ -42,10 +42,6 @@ class Renderer
 
 		this.m_scene= new THREE.Scene();
 
-		var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-		var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-		var cube = new THREE.Mesh( geometry, material );
-		this.m_scene.add( cube );
 		
 		this.m_camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
 		this.m_dummy = new THREE.Object3D;
@@ -56,9 +52,9 @@ class Renderer
 		this.m_camera.lookAt(new THREE.Vector3(0,0,0));
 
 		this.m_dummy.add(this.m_camera);
-		
+		console.log(this.m_dummy.rotation);
 		var light = new THREE.AmbientLight( 0x404040 ); // soft white light
-		//this.m_scene.add( light );
+		this.m_scene.add( light );
 		this.m_terrain = new Mesh(this.m_scene);
 
 		
@@ -79,21 +75,22 @@ class Renderer
 			if(this.m_mouseOldX != mouseX)
 			{
 				//this is strange 
-				this.m_dummy.rotation.y += (this.m_mouseOldX - mouseX)/360;
-				this.m_dummy.rotation.x -= (this.m_mouseOldY - mouseY)/360;
+				this.m_dummy.rotation.y += Math.PI * (this.m_mouseOldX - mouseX)/360;
+				this.m_dummy.rotation.x -= Math.PI * (this.m_mouseOldY - mouseY)/360;
 				//this.m_dummy.rotation.y+=0.1;
 				//normalize rotation
 
 				
 				this.m_mouseOldX = mouseX;
 				this.m_mouseOldY = mouseY;
-				console.log(this.m_dummy.rotation.y);
+				console.log(this.m_dummy.rotation);
 				
 			}
 			
 		}
 		if(this.m_keylistener.getMouseWheel())
 		{
+			console.log(this.m_keylistener.getMouseWheel());
 		}
 
 		if(this.m_keylistener.getLeftMouseButtonDown())

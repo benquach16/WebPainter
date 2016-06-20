@@ -66,27 +66,31 @@ class Renderer
 		this.m_renderer.render(this.m_scene, this.m_camera);
 		//this.m_terrain.render(this.m_renderer, this.m_scene, this.m_camera);
 		//if we have right click rotate the camera around the origin
+		
+		var mouseX:number = this.m_keylistener.getMouseX();
+		var mouseY:number = this.m_keylistener.getMouseY();
 		if(this.m_keylistener.getRightMouseButtonDown())
  		{
 
 			//rotate camera around origin
-			var mouseX:number = this.m_keylistener.getMouseX();
-			var mouseY:number = this.m_keylistener.getMouseY();
 			if(this.m_mouseOldX != mouseX)
 			{
-				//this is strange 
+				//turn this into radians
 				this.m_dummy.rotation.y += Math.PI * (this.m_mouseOldX - mouseX)/360;
-				this.m_dummy.rotation.x -= Math.PI * (this.m_mouseOldY - mouseY)/360;
+				this.m_dummy.rotation.x += Math.PI * (this.m_mouseOldY - mouseY)/360;
 				//this.m_dummy.rotation.y+=0.1;
-				//normalize rotation
-
-				
 				this.m_mouseOldX = mouseX;
 				this.m_mouseOldY = mouseY;
 				//console.log(this.m_dummy.rotation);
 				
 			}
 			
+		}
+		else
+		{
+			//This is to avoid the 'jumping' issue if you move your mouse a lot
+			this.m_mouseOldX = mouseX;
+			this.m_mouseOldY = mouseY;			
 		}
 		if(this.m_keylistener.getMouseWheel() != 0)
 		{

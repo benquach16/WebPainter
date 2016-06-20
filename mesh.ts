@@ -24,7 +24,7 @@ class Mesh
 		_scene.add(this.m_mesh);
 	}
 
-	paint(_point: THREE.Vector3, _camera: THREE.Camera) : void
+	paint(_point: THREE.Vector2, _camera: THREE.Camera) : void
 	{
 
 		var raycaster : THREE.Raycaster = new THREE.Raycaster();

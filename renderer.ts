@@ -103,7 +103,7 @@ class Renderer
 			var mouseX : number = this.m_keylistener.getMouseX();
 			var mouseY : number = this.m_keylistener.getMouseY();
 			//do some math here
-			var mouseVector : THREE.Vector3 = new THREE.Vector3(mouseX, mouseY, 0.5);
+			var mouseVector : THREE.Vector2 = new THREE.Vector2(mouseX, mouseY);
 
 			mouseVector.x = 2 * (mouseX / window.innerWidth) - 1;
 			mouseVector.y = -2 * (mouseY / window.innerHeight) + 1;

@@ -83,14 +83,17 @@ class Renderer
 				
 				this.m_mouseOldX = mouseX;
 				this.m_mouseOldY = mouseY;
-				console.log(this.m_dummy.rotation);
+				//console.log(this.m_dummy.rotation);
 				
 			}
 			
 		}
-		if(this.m_keylistener.getMouseWheel())
+		if(this.m_keylistener.getMouseWheel() != 0)
 		{
-			console.log(this.m_keylistener.getMouseWheel());
+			//console.log(this.m_keylistener.getMouseWheel());
+			this.m_camera.position.z += this.m_keylistener.getMouseWheel();
+			this.m_keylistener.resetMouseWheel();
+
 		}
 
 		if(this.m_keylistener.getLeftMouseButtonDown())

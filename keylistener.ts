@@ -17,7 +17,7 @@ class KeyListener
 		canvas.addEventListener("mousedown", this.mouseDown, false);
 		canvas.addEventListener("mouseup", this.mouseUp, false);
 		canvas.addEventListener("mousemove", this.mouseMove, false);
-		canvas.addEventListener("mousewheel", this.mouseWheel, false);
+		canvas.addEventListener("wheel", this.mouseWheel, false);
 
 	}
 
@@ -58,7 +58,8 @@ class KeyListener
 
 	mouseWheel = (event) =>
 	{
-		this.mouseWheel = event.detail;
+		//console.log("mouse wheel event");
+		this.m_mouseWheel = event.deltaY;
 	}
 
 	getLeftMouseButtonDown() : boolean
@@ -85,4 +86,10 @@ class KeyListener
 	{
 		return this.m_mouseWheel;
 	}
+
+	resetMouseWheel() : void
+	{
+		this.m_mouseWheel = 0;
+	}
+
 }

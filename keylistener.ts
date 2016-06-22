@@ -87,6 +87,9 @@ class KeyListener
 		return this.m_mouseWheel;
 	}
 
+	// The existance of this function is a mild hack
+	// essentially, since only change mouse delta on a mousewheel event, it never updates this variable
+	// when the user stops moving their mouse. So we have to do it ourselves
 	resetMouseWheel() : void
 	{
 		this.m_mouseWheel = 0;

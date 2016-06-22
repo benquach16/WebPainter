@@ -96,6 +96,7 @@ class Renderer
 		{
 			//console.log(this.m_keylistener.getMouseWheel());
 			this.m_camera.position.z += this.m_keylistener.getMouseWheel();
+			//see keylistener class
 			this.m_keylistener.resetMouseWheel();
 
 		}
@@ -114,8 +115,8 @@ class Renderer
 
 
 			
-			this.m_terrain.paint(mouseVector, this.m_camera);
-			
+			this.m_terrain.paint(mouseVector, this.m_camera, this.m_renderer);
+
 		}
 	}
 

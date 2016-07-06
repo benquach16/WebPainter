@@ -29,10 +29,8 @@ class Renderer
 		this.m_keylistener = new KeyListener();
 		this.m_mouseOldX = 0;
 		this.m_mouseOldY = 0;
-		this.m_screenWidth = 1000;
-		this.m_screenHeight = 1000;
-		
-		
+
+				
 		this.m_renderer = new THREE.WebGLRenderer();
 		this.m_renderer.setSize(window.innerWidth, window.innerHeight);
 		this.m_renderer.setClearColor(0x6655FF,1);
@@ -63,7 +61,9 @@ class Renderer
 	run(): void
 	{
 		requestAnimationFrame(() => this.run());
-		this.m_renderer.render(this.m_scene, this.m_camera);
+		//this.m_renderer.render(this.m_scene, this.m_camera);
+		this.m_terrain.renderToTexture(this.m_renderer);
+		
 		//this.m_terrain.render(this.m_renderer, this.m_scene, this.m_camera);
 		//if we have right click rotate the camera around the origin
 		

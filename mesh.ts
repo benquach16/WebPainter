@@ -43,20 +43,19 @@ class Mesh
 		if(intersects.length > 0)
 			console.log(intersects);
 
-		var imageData = _renderer.domElement.toDataURL();
+		//var imageData = _renderer.domElement.toDataURL();
 
 		//try to load imageData?
 
-		var tex = new THREE.TextureLoader().load(imageData);
-		console.log(tex);
+		//var tex = new THREE.TextureLoader().load(imageData);
 
 		var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(
 			{
-				map:imageData
+				map:this.m_textureRenderTarget.texture
 			});
 
 		var t=	<THREE.MeshBasicMaterial>this.m_mesh.material;
-		t.map = tex;
+		t.map = this.m_textureRenderTarget.texture;
 		t.needsUpdate=true;
 		
 	}
@@ -71,6 +70,8 @@ class Mesh
 				color:0xCC0000
 			});
 		var mesh = new THREE.Mesh(geometry, material);
+		this.m_textureRenderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight, { minFilter: THREE.LinearFilter, magFilter: THREE.NearestFilter});
+		
 		this.m_renderScene = new THREE.Scene();
 		this.m_renderScene.add(mesh);
 		this.m_renderCamera.lookAt(new THREE.Vector3(0,0,0));
@@ -81,7 +82,8 @@ class Mesh
 	renderToTexture(_renderer) : void
 	{
 		//render to rendertarget
-		_renderer.render(this.m_renderScene, this.m_renderCamera);
+		//_renderer.render(this.m_renderScene, this.m_renderCamera);
+		_renderer.render(this.m_renderScene, this.m_renderCamera, this.m_textureRenderTarget);
 	}
 
 	

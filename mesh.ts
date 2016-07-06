@@ -10,7 +10,8 @@ class Mesh
 
 	m_splatShader: THREE.ShaderMaterial;
 
-	m_renderCamera : THREE.PerspectiveCamera;
+	//m_renderCamera : THREE.PerspectiveCamera;
+	m_renderCamera : THREE.OrthographicCamera;
 	m_textureQuad : THREE.PlaneGeometry;
 	m_renderScene : THREE.Scene;
 	m_textureRenderTarget : THREE.WebGLRenderTarget;
@@ -63,12 +64,13 @@ class Mesh
 	setupRenderScene() : void
 	{
 		//SETUP THE CAMERA AND THE QUAD RIGHT HERE
-		this.m_renderCamera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
+		//this.m_renderCamera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
+		this.m_renderCamera = new THREE.OrthographicCamera(-100, 100, 100, -100,-500,1000);
 		this.m_renderCamera.position.z = 50;
 		this.m_renderCamera.lookAt(new THREE.Vector3(0,0,0));
 
 		
-		var geometry = new THREE.BoxGeometry( 5, 5, 5 );
+		var geometry = new THREE.BoxGeometry( 50, 50, 50 );
 		var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(
 			{
 				color:0xCC0000
@@ -85,8 +87,8 @@ class Mesh
 	renderToTexture(_renderer) : void
 	{
 		//render to rendertarget
-		//_renderer.render(this.m_renderScene, this.m_renderCamera);
-		_renderer.render(this.m_renderScene, this.m_renderCamera, this.m_textureRenderTarget);
+		_renderer.render(this.m_renderScene, this.m_renderCamera);
+		//_renderer.render(this.m_renderScene, this.m_renderCamera, this.m_textureRenderTarget);
 	}
 
 	

@@ -12,6 +12,8 @@ class Mesh
 
 	m_splatShader: THREE.ShaderMaterial;
 
+
+	//All of this belongs to stuff related to the render to texture
 	//m_renderCamera : THREE.PerspectiveCamera;
 	m_renderCamera : THREE.OrthographicCamera;
 	m_textureQuad : THREE.PlaneGeometry;
@@ -29,6 +31,7 @@ class Mesh
 					color: 0xCCCC00
 				});
 		this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_material);
+		this.m_mesh.rotation.x = -Math.PI/2;
 		_scene.add(this.m_mesh);
 		this.setupRenderScene();
 	}

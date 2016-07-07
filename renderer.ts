@@ -44,8 +44,11 @@ class Renderer
 		this.m_camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
 		this.m_dummy = new THREE.Object3D;
 		this.m_scene.add(this.m_dummy);
+
+		var grid = new THREE.GridHelper(300, 10);
+		this.m_scene.add(grid);
 		
-		this.m_camera.position.z=150;
+		this.m_camera.position.y=150;
 		
 		this.m_camera.lookAt(new THREE.Vector3(0,0,0));
 
@@ -76,8 +79,8 @@ class Renderer
 			if(this.m_mouseOldX != mouseX)
 			{
 				//turn this into radians
-				this.m_dummy.rotation.y += Math.PI * (this.m_mouseOldX - mouseX)/360;
-				this.m_dummy.rotation.x += Math.PI * (this.m_mouseOldY - mouseY)/360;
+				this.m_dummy.rotation.x -= Math.PI * (this.m_mouseOldX - mouseX)/360;
+				this.m_dummy.rotation.z -= Math.PI * (this.m_mouseOldY - mouseY)/360;
 				//this.m_dummy.rotation.y+=0.1;
 				this.m_mouseOldX = mouseX;
 				this.m_mouseOldY = mouseY;
@@ -95,7 +98,7 @@ class Renderer
 		if(this.m_keylistener.getMouseWheel() != 0)
 		{
 			//console.log(this.m_keylistener.getMouseWheel());
-			this.m_camera.position.z += this.m_keylistener.getMouseWheel();
+			this.m_camera.position.y += this.m_keylistener.getMouseWheel();
 			//see keylistener class
 			this.m_keylistener.resetMouseWheel();
 

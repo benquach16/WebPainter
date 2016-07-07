@@ -1651,6 +1651,7 @@ declare namespace THREE {
         point: Vector3;
         index: number;
         face: Face3;
+		uv: Vector2;
         faceIndex: number;
         object: Object3D;
     }

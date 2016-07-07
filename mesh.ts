@@ -1,5 +1,7 @@
 ///<reference path="./three.d.ts"/>
 
+const RENDERSIZE : number = 200;
+
 class Mesh
 {
 	m_mesh: THREE.Mesh;
@@ -42,22 +44,23 @@ class Mesh
 
 		
 		if(intersects.length > 0)
-			console.log(intersects);
+		{
 
-		//var imageData = _renderer.domElement.toDataURL();
+			//var imageData = _renderer.domElement.toDataURL();
 
-		//try to load imageData?
+			//try to load imageData?
+			var t=	<THREE.MeshBasicMaterial>this.m_mesh.material;
+			t.map = this.m_textureRenderTarget.texture;
+			t.needsUpdate=true;
+			
+			var intersect = intersects[0];
+			console.log(intersect.uv);
 
-		//var tex = new THREE.TextureLoader().load(imageData);
-
-		var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(
-			{
-				map:this.m_textureRenderTarget.texture
-			});
-
-		var t=	<THREE.MeshBasicMaterial>this.m_mesh.material;
-		t.map = this.m_textureRenderTarget.texture;
-		t.needsUpdate=true;
+			//convert uv to real space coordinates of a nxn space
+			//coordinates start at -RENDERSIZE -RENDERSIZE
+			var x = intersect.uv.x;
+			var y = intersect.uv.y;
+		}
 		
 	}
 
@@ -65,12 +68,12 @@ class Mesh
 	{
 		//SETUP THE CAMERA AND THE QUAD RIGHT HERE
 		//this.m_renderCamera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
-		this.m_renderCamera = new THREE.OrthographicCamera(-100, 100, 100, -100,-500,1000);
+		this.m_renderCamera = new THREE.OrthographicCamera(-RENDERSIZE/2, RENDERSIZE/2, RENDERSIZE/2, -RENDERSIZE/2,-500,1000);
 		this.m_renderCamera.position.z = 50;
 		this.m_renderCamera.lookAt(new THREE.Vector3(0,0,0));
 
 		
-		var geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		var geometry = new THREE.PlaneGeometry( RENDERSIZE, RENDERSIZE );
 		var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(
 			{
 				color:0xCC0000
@@ -87,8 +90,8 @@ class Mesh
 	renderToTexture(_renderer) : void
 	{
 		//render to rendertarget
-		_renderer.render(this.m_renderScene, this.m_renderCamera);
-		//_renderer.render(this.m_renderScene, this.m_renderCamera, this.m_textureRenderTarget);
+		//_renderer.render(this.m_renderScene, this.m_renderCamera);
+		_renderer.render(this.m_renderScene, this.m_renderCamera, this.m_textureRenderTarget);
 	}
 
 	

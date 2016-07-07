@@ -61,7 +61,7 @@ class Renderer
 	run(): void
 	{
 		requestAnimationFrame(() => this.run());
-		//this.m_renderer.render(this.m_scene, this.m_camera);
+		this.m_renderer.render(this.m_scene, this.m_camera);
 		this.m_terrain.renderToTexture(this.m_renderer);
 		
 		//this.m_terrain.render(this.m_renderer, this.m_scene, this.m_camera);

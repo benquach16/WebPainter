@@ -60,6 +60,21 @@ class Mesh
 			//coordinates start at -RENDERSIZE -RENDERSIZE
 			var x = intersect.uv.x;
 			var y = intersect.uv.y;
+			x = x * RENDERSIZE;
+			x = x - (RENDERSIZE/2);
+			y = y * RENDERSIZE;
+			y = y - (RENDERSIZE/2);
+
+		
+			var geometry = new THREE.PlaneGeometry( 10, 10 );
+			var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(
+				{
+					color:0x00FF00
+				});
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.x = x;
+			mesh.position.y = y;
+			this.m_renderScene.add(mesh);
 		}
 		
 	}

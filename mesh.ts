@@ -1,12 +1,14 @@
 ///<reference path="./three.d.ts"/>
+///<reference path="./renderscene.ts"/>
 
-const RENDERSIZE : number = 200;
+const RENDERSIZE : number = 500;
 
 class Mesh
 {
 	m_mesh: THREE.Mesh;
-	m_geometry: THREE.PlaneGeometry;
+	//m_geometry: THREE.PlaneGeometry;
 	//m_geometry: THREE.SphereGeometry;
+	m_geometry: THREE.Geometry;
 	m_material: THREE.MeshBasicMaterial;
 	m_scene: THREE.Scene;
 
@@ -22,9 +24,13 @@ class Mesh
 
 	constructor(_scene)
 	{
-		this.m_geometry = new THREE.PlaneGeometry(100, 100, 32, 32);
+		//this.m_geometry = new THREE.PlaneGeometry(300, 300, 64, 64);
+		var modelLoader = new THREE.JSONLoader();
 		//this.m_geometry = new THREE.SphereGeometry(50,16,16);
-
+		modelLoader.load("monkey.json", (geometry) => {
+			// create a mesh using the passed in geometry and textures
+			this.m_geometry = geometry;
+			
 		this.m_material =
 			new THREE.MeshBasicMaterial(
 				{
@@ -32,7 +38,14 @@ class Mesh
 				});
 		this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_material);
 		this.m_mesh.rotation.x = -Math.PI/2;
-		_scene.add(this.m_mesh);
+			_scene.add(this.m_mesh);
+			//this.m_mesh.scale.set(20,20,20);
+		});
+		
+		
+
+
+
 		this.setupRenderScene();
 	}
 

@@ -1,11 +1,83 @@
 
 
 //this is a singleton to render just the texture
-namespace RenderScene
+//have to use a class in this case too
+
+const RENDERSIZE : number = 1000;
+
+class RenderScene
 {
 
-	export function setupScene()
+	private static m_instance: RenderScene = new RenderScene();
+	
+	m_renderCamera : THREE.OrthographicCamera;
+	m_textureQuad : THREE.PlaneGeometry;
+	m_renderScene : THREE.Scene;
+	m_textureRenderTarget : THREE.WebGLRenderTarget;
+
+	constructor()
 	{
 
+		//do singleton stuff
+		RenderScene.m_instance = this;
+		
+		//SETUP THE CAMERA AND THE QUAD RIGHT HERE
+		//this.m_renderCamera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
+		this.m_renderCamera = new THREE.OrthographicCamera(-RENDERSIZE/2, RENDERSIZE/2, RENDERSIZE/2, -RENDERSIZE/2,-500,1000);
+		this.m_renderCamera.position.z = 50;
+		this.m_renderCamera.lookAt(new THREE.Vector3(0,0,0));
+
+		
+		var geometry = new THREE.PlaneGeometry( RENDERSIZE, RENDERSIZE );
+		var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(
+			{
+				color:0xCC0000
+			});
+		var mesh = new THREE.Mesh(geometry, material);
+		this.m_textureRenderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight, { minFilter: THREE.LinearFilter, magFilter: THREE.NearestFilter});
+		
+		this.m_renderScene = new THREE.Scene();
+		this.m_renderScene.add(mesh);
+	}
+
+	public renderToTexture(_renderer) : void
+	{
+		//render to rendertarget
+		//_renderer.render(this.m_renderScene, this.m_renderCamera);
+		_renderer.render(this.m_renderScene, this.m_renderCamera, this.m_textureRenderTarget);
+	}
+
+	//getter for singleton
+	public static getInstance() : RenderScene
+	{
+		return this.m_instance;
+	}
+
+	public getRenderTexture(): THREE.WebGLRenderTarget
+	{
+		return this.m_textureRenderTarget;
+	}
+
+	//get uv coords and caculate the position
+	public paint(_uv: THREE.Vector2)
+	{
+		
+		//convert uv to real space coordinates of a nxn space
+		//coordinates start at -RENDERSIZE -RENDERSIZE
+		var x = _uv.x;
+		var y = _uv.y;
+		x = x * RENDERSIZE;
+		x = x - (RENDERSIZE/2);
+		y = y * RENDERSIZE;
+		y = y - (RENDERSIZE/2);
+		var geometry = new THREE.PlaneGeometry( 10, 10 );
+		var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(
+			{
+				color:0x00FF00
+			});
+		var mesh = new THREE.Mesh(geometry, material);
+		mesh.position.x = x;
+		mesh.position.y = y;
+		this.m_renderScene.add(mesh);
 	}
 }

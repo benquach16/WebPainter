@@ -37,6 +37,7 @@ class Mesh
 		this.m_mesh.rotation.x = -Math.PI/2;
 			_scene.add(this.m_mesh);
 			//this.m_mesh.scale.set(20,20,20);
+			console.log(this.m_geometry);
 		});
 		
 		
@@ -61,7 +62,16 @@ class Mesh
 
 			
 			var intersect = intersects[0];
-			console.log(intersect.uv);
+			console.log(intersect);
+			console.log(intersect.faceIndex);
+
+			//use faceindex for finding the uv coordinates to mask
+
+			//This assumes a lot.
+			//It only gets uv coordinates if there is only one set of uv coordinates for a model
+			//if you have multiple textures for a model, this will BREAK.
+			//but if you're painting on it, why would you do that?
+			console.log(this.m_geometry.faceVertexUvs[0][intersect.faceIndex]);
 
 			RenderScene.getInstance().paint(intersect.uv);
 

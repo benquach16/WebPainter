@@ -65,7 +65,7 @@ class Renderer
 	{
 		requestAnimationFrame(() => this.run());
 		this.m_renderer.render(this.m_scene, this.m_camera);
-		this.m_terrain.renderToTexture(this.m_renderer);
+		RenderScene.getInstance().renderToTexture(this.m_renderer);
 		
 		//this.m_terrain.render(this.m_renderer, this.m_scene, this.m_camera);
 		//if we have right click rotate the camera around the origin

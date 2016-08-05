@@ -8,16 +8,12 @@ class Mesh
 	//m_geometry: THREE.SphereGeometry;
 	m_geometry: THREE.Geometry;
 	m_material: THREE.MeshBasicMaterial;
+	m_geometryShader: THREE.ShaderMaterial;
 	m_scene: THREE.Scene;
 
 	m_splatShader: THREE.ShaderMaterial;
 
 
-	//All of this belongs to stuff related to the render to texture
-	m_renderCamera : THREE.OrthographicCamera;
-	m_textureQuad : THREE.PlaneGeometry;
-	m_renderScene : THREE.Scene;
-	m_textureRenderTarget : THREE.WebGLRenderTarget;
 
 	constructor(_scene)
 	{

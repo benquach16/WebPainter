@@ -21,16 +21,28 @@ class Mesh
 		var modelLoader = new THREE.JSONLoader();
 		//this.m_geometry = new THREE.SphereGeometry(50,16,16);
 		modelLoader.load("monkey.json", (geometry) => {
+
+			var uniforms = {
+				texture: RenderScene.getInstance().getRenderTexture().texture;
+			};
+
+			this.m_geometryShader = new THREE.ShaderMaterial({
+				uniforms: uniforms,
+				vertexShader: document.getElementById('cubeVertexShader').innerHTML,
+				fragmentShader: document.getElementById('cubeFragmentShader').innerHTML
+			});
+
+			
 			// create a mesh using the passed in geometry and textures
 			this.m_geometry = geometry;
 			
-		this.m_material =
-			new THREE.MeshBasicMaterial(
-				{
-					color: 0xCCCC00
-				});
-		this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_material);
-		this.m_mesh.rotation.x = -Math.PI/2;
+			this.m_material =
+				new THREE.MeshBasicMaterial(
+					{
+						color: 0xCCCC00
+					});
+			this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_material);
+			this.m_mesh.rotation.x = -Math.PI/2;
 			_scene.add(this.m_mesh);
 			//this.m_mesh.scale.set(20,20,20);
 			console.log(this.m_geometry);

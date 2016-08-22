@@ -23,7 +23,7 @@ class Mesh
 		modelLoader.load("monkey.json", (geometry) => {
 
 			var uniforms = {
-				texture: RenderScene.getInstance().getRenderTexture().texture;
+				texture: RenderScene.getInstance().getRenderTexture().texture
 			};
 
 			this.m_geometryShader = new THREE.ShaderMaterial({

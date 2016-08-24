@@ -28,8 +28,8 @@ class Mesh
 
 			this.m_geometryShader = new THREE.ShaderMaterial({
 				uniforms: uniforms,
-				vertexShader: document.getElementById('cubeVertexShader').innerHTML,
-				fragmentShader: document.getElementById('cubeFragmentShader').innerHTML
+				vertexShader: document.getElementById('vertexshader').innerHTML,
+				fragmentShader: document.getElementById('fragmentshader').innerHTML
 			});
 
 			

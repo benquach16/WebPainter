@@ -118,7 +118,7 @@ class Renderer
 
 
 			
-			this.m_terrain.paint(mouseVector, this.m_camera, this.m_renderer);
+			this.m_terrain.paint(mouseVector, this.m_camera);
 
 		}
 	}

@@ -1,4 +1,5 @@
 ///<reference path="./three.d.ts"/>
+///<reference path="./dataloader.ts"/>
 ///<reference path="./renderscene.ts"/>
 
 class Mesh
@@ -28,8 +29,8 @@ class Mesh
 
 			this.m_geometryShader = new THREE.ShaderMaterial({
 				uniforms: uniforms,
-				vertexShader: document.getElementById('vertexshader').innerHTML,
-				fragmentShader: document.getElementById('fragmentshader').innerHTML
+				vertexShader: document.getElementById('vertexshader').textContent,
+				fragmentShader: document.getElementById('fragmentshader').textContent
 			});
 
 			
@@ -41,7 +42,7 @@ class Mesh
 					{
 						color: 0xCCCC00
 					});
-			this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_material);
+			this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_geometryShader);
 			this.m_mesh.rotation.x = -Math.PI/2;
 			_scene.add(this.m_mesh);
 			//this.m_mesh.scale.set(20,20,20);
@@ -51,8 +52,7 @@ class Mesh
 		
 	}
 
-	//renderer as an argument is temporary!
-	paint(_point: THREE.Vector2, _camera: THREE.Camera, _renderer) : void
+	paint(_point: THREE.Vector2, _camera: THREE.Camera) : void
 	{
 
 		var raycaster : THREE.Raycaster = new THREE.Raycaster();
@@ -62,13 +62,7 @@ class Mesh
 
 		
 		if(intersects.length > 0)
-		{
-
-			//var imageData = _renderer.domElement.toDataURL();
-
-			//try to load imageData?
-
-			
+		{			
 			var intersect = intersects[0];
 			console.log(intersect);
 			console.log(intersect.faceIndex);

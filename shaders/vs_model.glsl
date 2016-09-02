@@ -1,6 +1,6 @@
 
 
-void main()
+main()
 {
 	
 }

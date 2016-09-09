@@ -21,19 +21,10 @@ class Mesh
 		//this.m_geometry = new THREE.PlaneGeometry(300, 300, 64, 64);
 		var modelLoader = new THREE.JSONLoader();
 		//this.m_geometry = new THREE.SphereGeometry(50,16,16);
-		modelLoader.load("monkey.json", (geometry) => {
 
-			var uniforms = {
-				texture: RenderScene.getInstance().getRenderTexture().texture
-			};
-
-			this.m_geometryShader = new THREE.ShaderMaterial({
-				uniforms: uniforms,
-				vertexShader: document.getElementById('vertexshader').textContent,
-				fragmentShader: document.getElementById('fragmentshader').textContent
-			});
-
-			
+		//we want to asynch load text from the shaders and then load the mesh afterwards
+		//NOTE: shoud load mesh FIRST then load shaders AFTER then apply
+		modelLoader.load("monkey.json", (geometry) => {		
 			// create a mesh using the passed in geometry and textures
 			this.m_geometry = geometry;
 			
@@ -42,7 +33,7 @@ class Mesh
 					{
 						color: 0xCCCC00
 					});
-			this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_geometryShader);
+			this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_material);
 			this.m_mesh.rotation.x = -Math.PI/2;
 			_scene.add(this.m_mesh);
 			//this.m_mesh.scale.set(20,20,20);
@@ -51,6 +42,24 @@ class Mesh
 		
 		
 	}
+
+	
+
+	loadShaders() : void
+	{
+		var vertexShaderText;
+		var fragmentShaderText;
+		
+		DataLoader.readFile("./shaders/fs_model.glsl");
+
+	}
+
+	loadedShaderMaterial(_material : THREE.ShaderMaterial)
+	{
+		this.m_geometryShader = _material;
+		this.m_mesh.material = this.m_geometryShader;
+	}
+	
 
 	paint(_point: THREE.Vector2, _camera: THREE.Camera) : void
 	{

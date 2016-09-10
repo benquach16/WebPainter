@@ -42,9 +42,7 @@ class Mesh
 						vertexShader: VS_SHADER_SOURCE,
 						fragmentShader: FS_SHADER_SOURCE,
 
-					});
-
-			
+					});			
 			this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_geometryShader);
 			this.m_mesh.rotation.x = -Math.PI/2;
 			_scene.add(this.m_mesh);

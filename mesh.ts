@@ -89,8 +89,8 @@ class Mesh
 
 			RenderScene.getInstance().paint(intersect.uv);
 
-			var t=	<THREE.MeshBasicMaterial>this.m_mesh.material;
-			t.map = RenderScene.getInstance().getRenderTexture().texture;
+			var t=	<THREE.ShaderMaterial>this.m_mesh.material;
+			t.uniforms.tex.value = RenderScene.getInstance().getRenderTexture().texture;
 			t.needsUpdate=true;			
 
 		}

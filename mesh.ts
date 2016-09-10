@@ -1,6 +1,8 @@
 ///<reference path="./three.d.ts"/>
 ///<reference path="./dataloader.ts"/>
 ///<reference path="./renderscene.ts"/>
+///<reference path="./shaders/vs_model.ts"/>
+///<reference path="./shaders/fs_model.ts"/>
 
 class Mesh
 {
@@ -21,19 +23,24 @@ class Mesh
 		//this.m_geometry = new THREE.PlaneGeometry(300, 300, 64, 64);
 		var modelLoader = new THREE.JSONLoader();
 		//this.m_geometry = new THREE.SphereGeometry(50,16,16);
-
-		//we want to asynch load text from the shaders and then load the mesh afterwards
-		//NOTE: shoud load mesh FIRST then load shaders AFTER then apply
 		modelLoader.load("monkey.json", (geometry) => {		
 			// create a mesh using the passed in geometry and textures
 			this.m_geometry = geometry;
-			
 			this.m_material =
 				new THREE.MeshBasicMaterial(
 					{
 						color: 0xCCCC00
 					});
-			this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_material);
+
+			this.m_geometryShader =
+				new THREE.ShaderMaterial(
+					{
+						vertexShader: VS_SHADER_SOURCE,
+						fragmentShader: FS_SHADER_SOURCE
+					});
+
+			
+			this.m_mesh = new THREE.Mesh(this.m_geometry, this.m_geometryShader);
 			this.m_mesh.rotation.x = -Math.PI/2;
 			_scene.add(this.m_mesh);
 			//this.m_mesh.scale.set(20,20,20);
@@ -44,15 +51,6 @@ class Mesh
 	}
 
 	
-
-	loadShaders() : void
-	{
-		var vertexShaderText;
-		var fragmentShaderText;
-		
-		DataLoader.readFile("./shaders/fs_model.glsl");
-
-	}
 
 	loadedShaderMaterial(_material : THREE.ShaderMaterial)
 	{

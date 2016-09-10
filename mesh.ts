@@ -35,8 +35,13 @@ class Mesh
 			this.m_geometryShader =
 				new THREE.ShaderMaterial(
 					{
+						uniforms:
+						{
+							tex: { type: "t",value:  RenderScene.getInstance().getRenderTexture().texture }
+						},
 						vertexShader: VS_SHADER_SOURCE,
-						fragmentShader: FS_SHADER_SOURCE
+						fragmentShader: FS_SHADER_SOURCE,
+
 					});
 
 			

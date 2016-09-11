@@ -34,6 +34,7 @@ class Renderer
 		this.m_renderer = new THREE.WebGLRenderer();
 		this.m_renderer.setSize(window.innerWidth, window.innerHeight);
 		this.m_renderer.setClearColor(0x6655FF,1);
+		//TODO: REPLACE WITH A REAL ORBIT CAMERA
 		this.m_originPoint = new THREE.Vector3(0,0,0);
 		
 		document.getElementById("canvas").appendChild(this.m_renderer.domElement);
@@ -58,7 +59,6 @@ class Renderer
 		this.m_scene.add( light );
 		this.m_terrain = new Mesh(this.m_scene);
 
-		
 	}
 
 	run(): void
@@ -84,8 +84,7 @@ class Renderer
 				//this.m_dummy.rotation.y+=0.1;
 				this.m_mouseOldX = mouseX;
 				this.m_mouseOldY = mouseY;
-				//console.log(this.m_dummy.rotation);
-				
+				//console.log(this.m_dummy.rotation);				
 			}
 			
 		}

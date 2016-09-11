@@ -52,16 +52,6 @@ class Mesh
 		
 		
 	}
-
-	
-
-	loadedShaderMaterial(_material : THREE.ShaderMaterial)
-	{
-		this.m_geometryShader = _material;
-		this.m_mesh.material = this.m_geometryShader;
-	}
-	
-
 	paint(_point: THREE.Vector2, _camera: THREE.Camera) : void
 	{
 

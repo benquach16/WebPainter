@@ -6,7 +6,7 @@ varying vec2 vUv;
 
 varying vec3 worldSpaceLightPos;
 
-vec3 lightPos = vec3(2.0, -250.0, -20.0);
+vec3 lightPos = vec3(2.0, -250.0, -100.0);
 
 void main()
 {

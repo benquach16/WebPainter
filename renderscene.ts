@@ -1,4 +1,4 @@
-
+///<reference path="./ui.ts"/>
 
 //this is a singleton to render just the texture
 //have to use a class in this case too
@@ -14,6 +14,7 @@ class RenderScene
 	m_textureQuad : THREE.PlaneGeometry;
 	m_renderScene : THREE.Scene;
 	m_textureRenderTarget : THREE.WebGLRenderTarget;
+	m_templateTexture : THREE.Texture;
 
 	constructor()
 	{
@@ -38,6 +39,9 @@ class RenderScene
 		
 		this.m_renderScene = new THREE.Scene();
 		this.m_renderScene.add(mesh);
+
+		//load template texture
+		this.m_templateTexture = THREE.ImageUtils.loadTexture("resources/template.png");
 	}
 
 	public renderToTexture(_renderer) : void
@@ -52,7 +56,7 @@ class RenderScene
 	{
 		return this.m_instance;
 	}
-
+	//accessor for getting the render target
 	public getRenderTexture(): THREE.WebGLRenderTarget
 	{
 		return this.m_textureRenderTarget;
@@ -73,7 +77,9 @@ class RenderScene
 		var geometry = new THREE.PlaneGeometry( 10, 10 );
 		var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(
 			{
-				color:0x00FF00
+				color:0x00FF00,
+				map: this.m_templateTexture,
+				transparent: true
 			});
 		var mesh = new THREE.Mesh(geometry, material);
 		mesh.position.x = x;

@@ -40,10 +40,16 @@ module UI
 
 		public getColor() : string
 		{
-			
+			var ret = this.cPanel.color;
+			//ret = ret.replace('#', '0x');
+			return ret;
 		}
 
-		
+		public static getInstance() : UISingleton
+		{
+			return this.m_instance;
+		}
+
 		
 	}
 }

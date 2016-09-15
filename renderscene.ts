@@ -27,7 +27,6 @@ class RenderScene
 		this.m_renderCamera = new THREE.OrthographicCamera(-RENDERSIZE/2, RENDERSIZE/2, RENDERSIZE/2, -RENDERSIZE/2,-500,1000);
 		this.m_renderCamera.position.z = 50;
 		this.m_renderCamera.lookAt(new THREE.Vector3(0,0,0));
-
 		
 		var geometry = new THREE.PlaneGeometry( RENDERSIZE, RENDERSIZE );
 		var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(

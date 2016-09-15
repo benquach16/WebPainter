@@ -24,17 +24,34 @@ module UI
 		}
 	}
 
+	class sizePanel
+	{
+		size : number;
+		constructor()
+		{
+			this.size = 20;
+		}
+		public getSize() : number
+		{
+			return this.size;
+		}
+
+	}
+
 	export class UISingleton
 	{
 
 		private static m_instance: UISingleton = new UISingleton();
 
 		cPanel : colorPanel;
+		sPanel : sizePanel;
 		constructor()
 		{
 			var gui = new dat.GUI();
 			this.cPanel = new colorPanel();
+			this.sPanel = new sizePanel();
 			gui.addColor(this.cPanel, 'color');
+			gui.add(this.sPanel, 'size', 1, 200);
 
 		}
 
@@ -43,6 +60,10 @@ module UI
 			var ret = this.cPanel.color;
 			//ret = ret.replace('#', '0x');
 			return ret;
+		}
+		public getSize() : number
+		{
+			return this.sPanel.getSize();
 		}
 
 		public static getInstance() : UISingleton

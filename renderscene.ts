@@ -73,7 +73,9 @@ class RenderScene
 		x = x - (RENDERSIZE/2);
 		y = y * RENDERSIZE;
 		y = y - (RENDERSIZE/2);
-		var geometry = new THREE.PlaneGeometry( 10, 10 );
+
+		var size : number = UI.UISingleton.getInstance().getSize();
+		var geometry = new THREE.PlaneGeometry( size, size );
 		var colorObj = UI.UISingleton.getInstance().getColor();
 		console.log(colorObj);
 		var material : THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial(

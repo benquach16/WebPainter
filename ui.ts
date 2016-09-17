@@ -38,6 +38,19 @@ module UI
 
 	}
 
+	class opacityPanel
+	{
+		opacity : number;
+		constructor()
+		{
+			this.opacity = 1.0;
+		}
+		public getOpacity() : number
+		{
+			return this.opacity;
+		}
+	}
+
 	export class UISingleton
 	{
 
@@ -45,14 +58,16 @@ module UI
 
 		cPanel : colorPanel;
 		sPanel : sizePanel;
+		oPanel : opacityPanel;
 		constructor()
 		{
 			var gui = new dat.GUI();
 			this.cPanel = new colorPanel();
 			this.sPanel = new sizePanel();
+			this.oPanel = new opacityPanel();
 			gui.addColor(this.cPanel, 'color');
 			gui.add(this.sPanel, 'size', 1, 200);
-
+			gui.add(this.oPanel, 'opacity', 0.1, 1.0);
 		}
 
 		public getColor() : string
@@ -64,6 +79,10 @@ module UI
 		public getSize() : number
 		{
 			return this.sPanel.getSize();
+		}
+		public getOpacity() : number
+		{
+			return this.oPanel.getOpacity();
 		}
 
 		public static getInstance() : UISingleton

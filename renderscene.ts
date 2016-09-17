@@ -23,7 +23,6 @@ class RenderScene
 		RenderScene.m_instance = this;
 		
 		//SETUP THE CAMERA AND THE QUAD RIGHT HERE
-		//this.m_renderCamera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
 		this.m_renderCamera = new THREE.OrthographicCamera(-RENDERSIZE/2, RENDERSIZE/2, RENDERSIZE/2, -RENDERSIZE/2,-500,1000);
 		this.m_renderCamera.position.z = 50;
 		this.m_renderCamera.lookAt(new THREE.Vector3(0,0,0));
@@ -46,7 +45,6 @@ class RenderScene
 	public renderToTexture(_renderer) : void
 	{
 		//render to rendertarget
-		//_renderer.render(this.m_renderScene, this.m_renderCamera);
 		_renderer.render(this.m_renderScene, this.m_renderCamera, this.m_textureRenderTarget);
 	}
 
@@ -82,7 +80,8 @@ class RenderScene
 			{
 				color:UI.UISingleton.getInstance().getColor(),
 				map: this.m_templateTexture,
-				transparent: true
+				transparent: true,
+				opacity:UI.UISingleton.getInstance().getOpacity()
 			});
 		var mesh = new THREE.Mesh(geometry, material);
 		mesh.position.x = x;

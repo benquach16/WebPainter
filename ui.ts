@@ -11,39 +11,24 @@ module UI
 {
 
 	//make this private
-	class colorPanel
+	class propertiesPanel
 	{
 		color : string;
+		size : number;
+		opacity : number;
 		constructor()
 		{
 			this.color="#00ff00";
+			this.size = 20;
+			this.opacity = 1.0;
 		}
 		public getColor() : string
 		{
 			return this.color;
 		}
-	}
-
-	class sizePanel
-	{
-		size : number;
-		constructor()
-		{
-			this.size = 20;
-		}
 		public getSize() : number
 		{
 			return this.size;
-		}
-
-	}
-
-	class opacityPanel
-	{
-		opacity : number;
-		constructor()
-		{
-			this.opacity = 1.0;
 		}
 		public getOpacity() : number
 		{
@@ -56,33 +41,31 @@ module UI
 
 		private static m_instance: UISingleton = new UISingleton();
 
-		cPanel : colorPanel;
-		sPanel : sizePanel;
-		oPanel : opacityPanel;
+		panel : propertiesPanel;
+		
 		constructor()
 		{
 			var gui = new dat.GUI();
-			this.cPanel = new colorPanel();
-			this.sPanel = new sizePanel();
-			this.oPanel = new opacityPanel();
-			gui.addColor(this.cPanel, 'color');
-			gui.add(this.sPanel, 'size', 1, 200);
-			gui.add(this.oPanel, 'opacity', 0.1, 1.0);
+			this.panel = new propertiesPanel();
+
+			gui.addColor(this.panel, 'color');
+			gui.add(this.panel, 'size', 1, 200);
+			gui.add(this.panel, 'opacity', 0.1, 1.0);
 		}
 
 		public getColor() : string
 		{
-			var ret = this.cPanel.color;
+			var ret = this.panel.color;
 			//ret = ret.replace('#', '0x');
 			return ret;
 		}
 		public getSize() : number
 		{
-			return this.sPanel.getSize();
+			return this.panel.getSize();
 		}
 		public getOpacity() : number
 		{
-			return this.oPanel.getOpacity();
+			return this.panel.getOpacity();
 		}
 
 		public static getInstance() : UISingleton
